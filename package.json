@@ -1,0 +1,80 @@
+{
+  "name": "ai-monitoring",
+  "version": "0.6.1",
+  "private": true,
+  "description": "Local Codex, Claude Code and Gemini CLI agent context monitor",
+  "type": "module",
+  "main": "dist-electron/electron/main.js",
+  "dependencies": {
+    "@xyflow/react": "13.0.2",
+    "lucide-react": "1.75.0",
+    "react": "19.3.1",
+    "react-dom": "19.3.1"
+  },
+  "devDependencies": {
+    "@types/node": "26.6.6",
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "@vitejs/plugin-react": "6.3.0",
+    "electron": "45.3.4",
+    "electron-builder": "26.18.0",
+    "playwright": "1.65.1",
+    "tsx": "4.23.15",
+    "typescript": "7.0.2",
+    "vite": "8.3.8"
+  },
+  "scripts": {
+    "icon": "node scripts/generate-icon.mjs",
+    "dev": "node scripts/dev.mjs",
+    "build": "npm run typecheck && vite build && tsc -p tsconfig.electron.json",
+    "start": "electron .",
+    "typecheck": "tsc --noEmit -p tsconfig.json && tsc --noEmit -p tsconfig.electron.json",
+    "test": "tsx --test tests/*.test.ts",
+    "test:ui": "node scripts/smoke-ui.mjs",
+    "test:package": "node scripts/smoke-package.mjs",
+    "test:live": "tsx scripts/check-local.ts",
+    "preview": "vite --host 127.0.0.1",
+    "package:mac": "npm run build && electron-builder --mac --publish never",
+    "package:mac:dir": "npm run build && electron-builder --mac --dir --publish never --config.electronDist=node_modules/electron/dist",
+    "package:win": "npm run build && electron-builder --win --publish never"
+  },
+  "build": {
+    "appId": "local.ai-monitoring.desktop",
+    "productName": "AI Monitoring",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "dist/**/*",
+      "dist-electron/**/*",
+      "package.json",
+      "assets/icon.png"
+    ],
+    "mac": {
+      "identity": "-",
+      "icon": "assets/icon.png",
+      "category": "public.app-category.developer-tools",
+      "target": [
+        "dmg",
+        "zip"
+      ]
+    },
+    "win": {
+      "icon": "assets/icon.png",
+      "target": [
+        "nsis",
+        "portable"
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    },
+    "extraResources": [
+      {
+        "from": "scripts/collect-telemetry.mjs",
+        "to": "collect-telemetry.mjs"
+      }
+    ]
+  }
+}

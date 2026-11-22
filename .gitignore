@@ -1,0 +1,50 @@
+# Zależności i cache narzędzi
+node_modules/
+.npm/
+.cache/
+.vite/
+*.tsbuildinfo
+.eslintcache
+
+# Wyniki kompilacji i pakiety Electron
+/dist/
+/dist-electron/
+/release/
+/build/
+/out/
+
+# Artefakty testów, zrzuty ekranu i pokrycie kodu
+/artifacts/
+/coverage/
+/.nyc_output/
+/playwright-report/
+/test-results/
+
+# Logi i pliki tymczasowe
+*.log
+*.tmp
+*.swp
+*.swo
+*~
+
+# Lokalne zmienne środowiskowe; szablony pozostają w repozytorium
+.env
+.env.*
+!.env.example
+!.env.*.example
+!.env.sample
+!.env.template
+
+# Certyfikaty podpisywania lokalnych wydań
+*.p12
+*.pfx
+*.mobileprovision
+
+# Lokalne ustawienia IDE i pliki systemowe
+.idea/
+*.iml
+.vscode/*.local.json
+.DS_Store
+._*
+Thumbs.db
+Desktop.ini
